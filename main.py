@@ -24,56 +24,26 @@ while (running):
     #applique l'arriere plan de notre jeu
     screen.blit(backgroung, (0,-200))
 
-    #appliquer l'image de mon joueur
-    screen.blit(game.player.image, game.player.rect)
-
-    #actualiser la barre de vie du joueur
-    game.player.update_health_bar(screen)
-
-
-    #recuperer les projectiles du joueur
-    for projectile in game.player.all_projectiles:
-        projectile.move()
-
-    #recuperer les monstres de notre jeu
-    for monster in game.all_monsters:
-        monster.forward()
-        monster.update_health_bar(screen)
-
-    #appliquer mon groupe de projectiles
-
-    game.player.all_projectiles.draw(screen)
-
-    #appliquer les monstres
-
-    game.all_monsters.draw(screen)
-
-
-    #verifier si le joueur veut aller à gauche ou à droite
-
-    if game.pressed.get(pygame.K_RIGHT) and game.player.rect.x + game.player.rect.width < screen.get_width():
-        game.player.move_right()
-    elif game.pressed.get(pygame.K_LEFT) and game.player.rect.x > 0:
-        game.player.move_left()
-
-
-    #mettre à jour l'ecran
+    #verifier si notre jeu a commncé ou non
+    if game.is_playing:
+        #declencher les instructions de la partie
+        game.update(screen)
+    # mettre à jour l'ecran
     pygame.display.flip()
 
-    #si le joueur ferme cette fenetre
+        # si le joueur ferme cette fenetre
     for event in pygame.event.get():
-        #l'evenement est fermeture de fenêtre
+  # l'evenement est fermeture de fenêtre
         if event.type == pygame.QUIT:
-            running = False
-            pygame.quit()
-        #detecter si un joueur lache une touche du clavier
+                running = False
+                pygame.quit()
+# detecter si un joueur lache une touche du clavier
         elif event.type == pygame.KEYDOWN:
             game.pressed[event.key] = True
 
-            #detecter si la touche espace est utiliséé
+                # detecter si la touche espace est utiliséé
             if event.key == pygame.K_SPACE:
                 game.player.launch_projectile()
 
-        elif event.type == pygame.KEYUP:
-            game.pressed[event.key] = False
-
+            elif event.type == pygame.KEYUP:
+                game.pressed[event.key] = False

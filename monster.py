@@ -10,7 +10,7 @@ class Monster(pygame.sprite.Sprite):
         self.game = game
         self.health =100
         self.max_health =100
-        self.attack = 5
+        self.attack = 0.3
         self.image = pygame.image.load("assets/mummy.png")
         self.rect = self.image.get_rect()
         self.rect.x = 1000 + random.randint(0,300)
@@ -40,4 +40,8 @@ class Monster(pygame.sprite.Sprite):
         #le deplacement se fait si il n'y a pas de collisions
         if not self.game.collision_check(self, self.game.all_players):
             self.rect.x -= self.velocity
+        #si le monstre est en collision avec le joueur
+        else:
+            #infliger des degats
+            self.game.player.damage(self.attack)
 
