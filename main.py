@@ -27,9 +27,22 @@ while (running):
     #appliquer l'image de mon joueur
     screen.blit(game.player.image, game.player.rect)
 
+    #recuperer les projectiles du joueur
+    for projectile in game.player.all_projectiles:
+        projectile.move()
+
+    #recuperer les monstres de notre jeu
+    for monster in game.all_monsters:
+        monster.forward()
+
     #appliquer mon groupe de projectiles
 
     game.player.all_projectiles.draw(screen)
+
+    #appliquer les monstres
+
+    game.all_monsters.draw(screen)
+
 
     #verifier si le joueur veut aller à gauche ou à droite
 
