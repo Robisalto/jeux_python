@@ -66,5 +66,11 @@ while (running):
             if event.key == pygame.K_SPACE:
                 game.player.launch_projectile()
 
-            elif event.type == pygame.KEYUP:
-                game.pressed[event.key] = False
+        elif event.type == pygame.KEYUP:
+            game.pressed[event.key] = False
+
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            #verif pour savoir si la souris est en collison avec jouer
+            if play_button_rect.collidepoint(event.pos):
+                #mettre le jeu en mode lancé
+                game.start()

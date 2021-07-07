@@ -17,6 +17,17 @@ class Game:
         self.pressed = {}
         self.spawn_monster()
         self.spawn_monster()
+    def start(self):
+        self.is_playing =True
+        monster = Monster(self)
+        self.all_monsters.add(monster)
+
+    def game_over(self):
+        #remettre le jeu à neuf, retirer les monstres, remttre le joueur à 100 de vie, remettre le jeu en attente
+        self.all_monsters = pygame.sprite.Group()
+        self.player.health = self.player.max_health
+        self.is_playing = False
+
 
     def update(self, screen):
         # appliquer l'image de mon joueur
