@@ -8,7 +8,7 @@ from comet_event import CometFallEvent
 class Game:
     def __init__(self):
         #definir si le jeu a commencé ou non
-        self.is_playing = False
+        self.is_playing = True
         #generer notre joueur
         self.all_players = pygame.sprite.Group()
         self.player = Player(self)
@@ -46,10 +46,14 @@ class Game:
         for projectile in self.player.all_projectiles:
             projectile.move()
 
-        # recuperer les monstres de notre jeu
+        # # recuperer les monstres de notre jeu
         for monster in self.all_monsters:
             monster.forward()
             monster.update_health_bar(screen)
+
+        #recuperer les comets
+        for comet in self.comet_event.all_comets:
+            comet.fall()
 
         # appliquer mon groupe de projectiles
 
@@ -58,6 +62,9 @@ class Game:
         # appliquer les monstres
 
         self.all_monsters.draw(screen)
+
+        #appliquer les comets
+        self.comet_event.all_comets.draw(screen)
 
         # verifier si le joueur veut aller à gauche ou à droite
 
