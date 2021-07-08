@@ -19,7 +19,7 @@ class Game:
         self.spawn_monster()
         self.spawn_monster()
         #generer l'evenement comete
-        self.comet_event = CometFallEvent()
+        self.comet_event = CometFallEvent(self)
     def start(self):
         self.is_playing =True
         monster = Monster(self)
@@ -28,8 +28,10 @@ class Game:
     def game_over(self):
         #remettre le jeu à neuf, retirer les monstres, remttre le joueur à 100 de vie, remettre le jeu en attente
         self.all_monsters = pygame.sprite.Group()
+        self.comet_event.all_comets = pygame.sprite.Group()
         self.player.health = self.player.max_health
         self.is_playing = False
+        self.comet_event.reset_percent()
 
 
     def update(self, screen):

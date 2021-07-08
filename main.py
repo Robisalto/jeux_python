@@ -35,6 +35,10 @@ running = True
 #boucle tant que la condition est vraie
 
 while (running):
+
+    #introduit un delai dans ma boucle
+    pygame.time.delay(10)
+
     #applique l'arriere plan de notre jeu
     screen.blit(backgroung, (0,-200))
 
