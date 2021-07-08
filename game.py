@@ -1,6 +1,7 @@
 import pygame
 from player import Player
 from monster import Monster
+from comet_event import CometFallEvent
 
 # creer une classe qui va representer le jeu
 
@@ -17,6 +18,8 @@ class Game:
         self.pressed = {}
         self.spawn_monster()
         self.spawn_monster()
+        #generer l'evenement comete
+        self.comet_event = CometFallEvent()
     def start(self):
         self.is_playing =True
         monster = Monster(self)
@@ -35,6 +38,9 @@ class Game:
 
         # actualiser la barre de vie du joueur
         self.player.update_health_bar(screen)
+
+        #actualiser la barre evenement du jeu
+        self.comet_event.update_bar(screen)
 
         # recuperer les projectiles du joueur
         for projectile in self.player.all_projectiles:
